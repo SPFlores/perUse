@@ -1,6 +1,11 @@
 const express = require('express')
+const { join } = require('path')
 const app = express()
 require('dotenv').config()
+
+app.use(express.static(join(__dirname, 'client', 'build')))
+app.use(express.urlencoded({ extended: true }))
+app.use(express.json())
 
 require('./Routes')(app)
 
