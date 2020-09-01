@@ -8,8 +8,8 @@ const LoginPage = _ => {
 
   const [userState, setUserState] = useState({
     isLoggedIn: false,
-    failedLogin: false,
-    user: ''
+    failedLoginUsername: false,
+    failedLoginPassword: false
   })
 
   userState.renderRedirect = _ => {
@@ -20,8 +20,22 @@ const LoginPage = _ => {
 
   userState.handleLogInUser = e => {
     e.preventDefault()
-    if (username.current.value === '' || password.current.value === '') {
-      setUserState({ ...userState, failedLogin: true })
+    if (username.current.value === '' && password.current.value === '') {
+      console.log('major yar at your service captain sarcasm')
+      setUserState({
+        ...userState,
+        failedLoginUsername: true,
+        failedLoginPassword: true
+      })
+      sessionStorage.setItem('isLoggedIn', false)
+    } else if (username.current.value === '') {
+      console.log('big bad user yar')
+      setUserState({ ...userState, failedLoginUsername: true })
+      sessionStorage.setItem('isLoggedIn', false)
+    } else if (password.current.value === '') {
+      console.log('big bad password yar')
+      setUserState({ ...userState, failedLoginPassword: true })
+      sessionStorage.setItem('isLoggedIn', false)
     } else {
       axios.post('/login', {
         username: username.current.value,
@@ -29,41 +43,32 @@ const LoginPage = _ => {
       })
         .then(_ => {
           console.log('user is signed in')
+          sessionStorage.setItem('isLoggedIn', true)
           setUserState({ ...userState, isLoggedIn: true })
         })
         .catch(e => console.log(e))
     }
   }
 
-  userState.testing = e => {
-    e.preventDefault()
-    console.log(username.current.value)
-    console.log(password.current.value)
-    console.log(rememberMe.current.checked)
-  }
-
   return (
     <div>
-      {userState.isLoggedIn ? userState.renderRedirect() : console.log(username)}
+      {userState.isLoggedIn ? userState.renderRedirect() : null}
 
       <p>This is the login page</p>      <li>Text about logging in</li>
       <form>
         <h5>Login To Your Account</h5>
-        {/* <li>box for email</li> */}
         <div>
           <label htmlFor='username'>Username</label>
           <input type='text' id='username' name='username' ref={username} />
         </div>
-        {/* <li>box for password</li> */}
         <div><label htmlFor='password'>Password</label>
           <input type='text' id='password' name='password' ref={password} />
         </div>
-        {/* <li>checkbox for "remember me" that sets local storage</li> */}
-        <div>
+        {/* checkbox for "remember me" that sets local storage */}
+        {/* <div>
           <input type='checkbox' name='rememberMe' id='rememberMe' ref={rememberMe} />
           <label htmlFor='rememberMe'>Remember Me</label>
-        </div>
-        {/* <li>submit button that validates both fields filled, validates correct login</li> */}
+        </div> */}
         <button onClick={userState.handleLogInUser}>Submit</button>
       </form>
     </div>
