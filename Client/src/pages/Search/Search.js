@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react'
-// , useRef
 import axios from 'axios'
-import JobCard from '../../components/JobCard'
 
 const SearchPage = _ => {
   const [searchState, setSearchState] = useState({
@@ -15,13 +13,12 @@ const SearchPage = _ => {
     type: false,
     types: [],
     skills: false,
-    skills_tags: []
+    skills_tags: [],
+    renderCount: 0
   })
 
   useEffect(_ => {
-    searchState.jobs.forEach(job => console.log('render card'))
-    //render cards when variable renderCount changes
-    console.log(searchState.jobs)
+    searchState.jobs.forEach(_ => setSearchState({ ...searchState, renderCount: searchState.renderCount + 1 }))
   }, [searchState.jobs])
 
   searchState.handleSearchAll = e => {
@@ -51,7 +48,6 @@ const SearchPage = _ => {
   }
 
   searchState.typeFilter = _ => {
-    console.log('type dropdown appears')
     axios.get('/jobs')
       .then(({ data }) => {
         const typeArr = data.jobs.map(job => job.job_type)
@@ -115,7 +111,6 @@ const SearchPage = _ => {
   }
 
   searchState.getTypeOptions = _ => {
-    // console.log('searchState.getTypeOptions')
     const listItems = searchState.types.map(type =>
       <div key={searchState.types.indexOf(type)}>
         <button className='type' id={type} key={type} onClick={searchState.filterJobs}>{type}</button>
@@ -125,13 +120,28 @@ const SearchPage = _ => {
   }
 
   searchState.getSkillOptions = _ => {
-    // console.log('searchState.getSkillOptions')
     const listItems = searchState.skills_tags.map(skill =>
       <div key={searchState.skills_tags.indexOf(skill)}>
         <button className='skills' id={skill} key={skill} onClick={searchState.filterJobs}>{skill}</button>
       </div>
     )
     return <ul>{listItems}</ul>
+  }
+
+  searchState.renderCards = _ => {
+    const jobCards = searchState.jobs.map(job =>
+      <div key={job.id}>
+        <h4>Title: {job.title}</h4>
+        <h5>Company: {job.company}</h5>
+        <h5>Type: {job.job_type}</h5>
+        <h5>Location: {job.location}</h5>
+        {/* It is acknowledged that the below is not best practice when importing data from outside APIs for consumption. However, it does allow for the most flexibility in terms of consuming this particular API and is limited in scope to this small project. An alternative would be to import the description and .replace() all tags with apces, however this does not allow for flexibility in formatting of description. */}
+        <div dangerouslySetInnerHTML={{ __html: job.description }} />
+        <p>Skills: {job.skills_tag.join(', ')}</p>
+        <p>Applicant count: {job.applicant_count}</p>
+        <button>Apply</button>
+      </div>)
+    return <ul>{jobCards}</ul>
   }
 
   return (
@@ -147,11 +157,10 @@ const SearchPage = _ => {
 
         {searchState.location ? searchState.getLocationOptions() : searchState.type ? searchState.getTypeOptions() : searchState.skills ? searchState.getSkillOptions() : null}
 
-        <li>dynamically showing second dropdown for location, type, or skills (search all jobs, find listed attributes, put in new Set, display)</li>
         <li>search button that verifies input</li>
       </ul>
       <p>Display all jobs matching search criteria, one card for each.</p>
-      <JobCard />
+      {searchState.renderCount > 0 ? searchState.renderCards() : null}
     </div>
   )
 }
