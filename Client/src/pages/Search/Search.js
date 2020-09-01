@@ -142,20 +142,21 @@ const SearchPage = _ => {
 
   return (
     <div>
-      <p>This is the search page</p>
-      <ul>
-        <li>text about the page</li>
-        <button id='searchAll' onClick={searchState.handleSearchAll}>Display All Jobs</button>
-        <li>Filter by:</li>
-        <button id='locationButton' onClick={searchState.locationFilter}>Location</button>
-        <button id='typeButton' onClick={searchState.typeFilter}>Type of Job</button>
-        <button id='skillsButton' onClick={searchState.skillsFilter}>Skills</button>
+      <h4>Welcome to our search page!</h4>
+      <p>Here you can view all jobs available or sort by location, type, of skills needed. We make it easy to filter for the job right for you--once chosen filter is selected, you will be presented with options for your search, no typing or guessing at keywords necessary. Feel free to browse, and don't forget to sign in if you want to apply!</p>
+      <button id='searchAll' onClick={searchState.handleSearchAll}>Display All Jobs</button>
+      <br />
+      <br />
+      <h4>Filter jobs by:</h4>
+      <button id='locationButton' onClick={searchState.locationFilter}>Location</button>
+      <button id='typeButton' onClick={searchState.typeFilter}>Type of Job</button>
+      <button id='skillsButton' onClick={searchState.skillsFilter}>Skills</button>
 
-        {searchState.location ? searchState.getLocationOptions() : searchState.type ? searchState.getTypeOptions() : searchState.skills ? searchState.getSkillOptions() : null}
+      <br />
+      <br />
 
-        <li>search button that verifies input</li>
-      </ul>
-      <p>Display all jobs matching search criteria, one card for each.</p>
+      {searchState.location ? searchState.getLocationOptions() : searchState.type ? searchState.getTypeOptions() : searchState.skills ? searchState.getSkillOptions() : null}
+
       {searchState.renderCount > 0 ? searchState.renderCards() : null}
     </div>
   )
