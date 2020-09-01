@@ -18,10 +18,11 @@ const SearchPage = _ => {
     skills_tags: []
   })
 
-  // useEffect(_ => {
-  //   searchState.jobs.forEach(job => console.log('render card'))
-  // },
-  //   [searchState.jobs])
+  useEffect(_ => {
+    searchState.jobs.forEach(job => console.log('render card'))
+    //render cards when variable renderCount changes
+    console.log(searchState.jobs)
+  }, [searchState.jobs])
 
   searchState.handleSearchAll = e => {
     axios.get('/jobs')
@@ -85,11 +86,29 @@ const SearchPage = _ => {
       .catch(e => console.log(e))
   }
 
+  searchState.filterJobs = ({ target }) => {
+    const value = target.id
+    const filter = target.className
+    axios.get('/jobs')
+      .then(({ data }) => {
+        if (filter === 'location') {
+          const validJobs = data.jobs.filter(job => { return job.location === value })
+          setSearchState({ ...searchState, jobs: validJobs })
+        } else if (filter === 'type') {
+          const validJobs = data.jobs.filter(job => { return job.job_type === value })
+          setSearchState({ ...searchState, jobs: validJobs })
+        } else if (filter === 'skills') {
+          const validJobs = data.jobs.filter(job => job.skills_tag.includes(value))
+          setSearchState({ ...searchState, jobs: validJobs })
+        } else console.log('not working')
+      })
+      .catch(e => console.log(e))
+  }
+
   searchState.getLocationOptions = _ => {
-    // console.log('searchState.getLocationsOptions')
     const listItems = searchState.locations.map(location =>
       <div key={searchState.locations.indexOf(location)}>
-        <button id={location} key={location}>{location}</button>
+        <button className='location' id={location} key={location} onClick={searchState.filterJobs}>{location}</button>
       </div>
     )
     return <ul>{listItems}</ul>
@@ -99,7 +118,7 @@ const SearchPage = _ => {
     // console.log('searchState.getTypeOptions')
     const listItems = searchState.types.map(type =>
       <div key={searchState.types.indexOf(type)}>
-        <button id={type} key={type}>{type}</button>
+        <button className='type' id={type} key={type} onClick={searchState.filterJobs}>{type}</button>
       </div>
     )
     return <ul>{listItems}</ul>
@@ -109,7 +128,7 @@ const SearchPage = _ => {
     // console.log('searchState.getSkillOptions')
     const listItems = searchState.skills_tags.map(skill =>
       <div key={searchState.skills_tags.indexOf(skill)}>
-        <button id={skill} key={skill}>{skill}</button>
+        <button className='skills' id={skill} key={skill} onClick={searchState.filterJobs}>{skill}</button>
       </div>
     )
     return <ul>{listItems}</ul>
