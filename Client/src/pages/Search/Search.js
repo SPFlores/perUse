@@ -3,17 +3,13 @@ import axios from 'axios'
 
 const SearchPage = _ => {
   const [searchState, setSearchState] = useState({
-    searchArea: '',
-    searchLocation: false,
-    searchType: false,
-    searchSkill: false,
     jobs: [],
     location: false,
     locations: [],
-    type: false,
-    types: [],
     skills: false,
     skills_tags: [],
+    type: false,
+    types: [],
     renderCount: 0
   })
 
