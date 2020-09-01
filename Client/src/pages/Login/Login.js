@@ -5,12 +5,10 @@ import axios from 'axios'
 const LoginPage = _ => {
   const username = useRef()
   const password = useRef()
-  const rememberMe = useRef()
 
   const [userState, setUserState] = useState({
     isLoggedIn: false,
     failedLogin: false,
-    stayLoggedIn: false,
     user: ''
   })
 
