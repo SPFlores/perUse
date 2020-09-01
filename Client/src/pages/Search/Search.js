@@ -18,10 +18,10 @@ const SearchPage = _ => {
     skills_tags: []
   })
 
-  useEffect(_ => {
-    searchState.jobs.forEach(job => console.log('render card'))
-  },
-    [searchState.jobs])
+  // useEffect(_ => {
+  //   searchState.jobs.forEach(job => console.log('render card'))
+  // },
+  //   [searchState.jobs])
 
   searchState.handleSearchAll = e => {
     axios.get('/jobs')
@@ -32,25 +32,22 @@ const SearchPage = _ => {
       .catch(e => console.log(e))
   }
 
-  searchState.locationAxios = _ => {
+  searchState.locationFilter = _ => {
+    console.log('location dropdown appears')
     axios.get('/jobs')
       .then(({ data }) => {
         const locationsArr = data.jobs.map(job => job.location)
         const realLocations = locationsArr.filter(loc => typeof loc !== 'undefined')
         const locationOptions = new Set(realLocations)
-        setSearchState({ ...searchState, locations: [...locationOptions] })
+        setSearchState({
+          ...searchState,
+          location: true,
+          locations: [...locationOptions],
+          type: false,
+          skills: false
+        })
       })
       .catch(e => console.log(e))
-  }
-
-  searchState.locationFilter = _ => {
-    console.log('location dropdown appears')
-    setSearchState({
-      ...searchState, location: true,
-      type: false,
-      skills: false
-    })
-    searchState.locationAxios()
   }
 
   searchState.typeFilter = _ => {
@@ -74,7 +71,9 @@ const SearchPage = _ => {
 
   searchState.getLocationOptions = _ => {
     console.log('searchState.getLocationsOptions')
-    const listItems = searchState.locations.map(location => <h1 key={location}>{location}</h1>)
+    const listItems = searchState.locations.map(location =>
+      <button id={location} value={location} key={location}>{location}</button>
+    )
     return <ul>{listItems}</ul>
   }
 
@@ -89,9 +88,7 @@ const SearchPage = _ => {
         <button id='typeButton' onClick={searchState.typeFilter}>Type of Job</button>
         <button id='skillsButton' onClick={searchState.skillsFilter}>Skills</button>
 
-        {/* searchState.getLocationOptions( */}
-
-        {searchState.location ? console.log('true') : searchState.type ? <h6>Type Dropdown</h6> : searchState.skills ? <h6>Skills Dropdown</h6> : console.log('none of the above')}
+        {searchState.location ? searchState.getLocationOptions() : searchState.type ? <h6>Type Dropdown</h6> : searchState.skills ? <h6>Skills Dropdown</h6> : null}
 
         <li>dynamically showing second dropdown for location, type, or skills (search all jobs, find listed attributes, put in new Set, display)</li>
         <li>search button that verifies input</li>
