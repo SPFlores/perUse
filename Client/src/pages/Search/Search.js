@@ -68,12 +68,21 @@ const SearchPage = _ => {
   }
 
   searchState.skillsFilter = _ => {
-    console.log('skills dropdown appears')
-    setSearchState({
-      ...searchState, location: false,
-      type: false,
-      skills: true
-    })
+    axios.get('/jobs')
+      .then(({ data }) => {
+        const skillsRaw = data.jobs.map(job => job.skills_tag)
+        const skillsArr = [].concat.apply([], skillsRaw)
+        const realSkills = skillsArr.filter(skill => typeof skill !== 'undefined')
+        const skillOptions = new Set(realSkills)
+        setSearchState({
+          ...searchState,
+          location: false,
+          type: false,
+          skills_tags: [...skillOptions],
+          skills: true
+        })
+      })
+      .catch(e => console.log(e))
   }
 
   searchState.getLocationOptions = _ => {
@@ -96,6 +105,16 @@ const SearchPage = _ => {
     return <ul>{listItems}</ul>
   }
 
+  searchState.getSkillOptions = _ => {
+    // console.log('searchState.getSkillOptions')
+    const listItems = searchState.skills_tags.map(skill =>
+      <div key={searchState.skills_tags.indexOf(skill)}>
+        <button id={skill} key={skill}>{skill}</button>
+      </div>
+    )
+    return <ul>{listItems}</ul>
+  }
+
   return (
     <div>
       <p>This is the search page</p>
@@ -107,7 +126,7 @@ const SearchPage = _ => {
         <button id='typeButton' onClick={searchState.typeFilter}>Type of Job</button>
         <button id='skillsButton' onClick={searchState.skillsFilter}>Skills</button>
 
-        {searchState.location ? searchState.getLocationOptions() : searchState.type ? searchState.getTypeOptions() : searchState.skills ? <h6>Skills Dropdown</h6> : null}
+        {searchState.location ? searchState.getLocationOptions() : searchState.type ? searchState.getTypeOptions() : searchState.skills ? searchState.getSkillOptions() : null}
 
         <li>dynamically showing second dropdown for location, type, or skills (search all jobs, find listed attributes, put in new Set, display)</li>
         <li>search button that verifies input</li>
