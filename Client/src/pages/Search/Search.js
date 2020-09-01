@@ -18,7 +18,6 @@ const SearchPage = _ => {
   [searchState.jobs])
 
   searchState.handleSearchAll = e => {
-    e.preventDefault()
     axios.get('/jobs')
       .then(({ data }) => {
         console.log(data.jobs)
@@ -27,13 +26,18 @@ const SearchPage = _ => {
       .catch(e => console.log(e))
   }
 
+  searchState.locationFilter = _ => {
+    console.log('location dropdown appears')
+  }
+
   return (
     <div>
       <p>This is the search page</p>
       <ul>
         <li>text about the page</li>
         <button id='searchAll' onClick={searchState.handleSearchAll}>Display All Jobs</button>
-        <li>dropdown to set location, type, or skills</li>
+        <li>Radio buttons to set location, type, or skills</li>
+        <input type='radio' name='location' id='locationRadio' onClick={searchState.locationFilter} /><label htmlFor='locationRadio'>Location</label>
         <li>dynamically showing second dropdown for location, type, or skills (search all jobs, find listed attributes, put in new Set, display)</li>
         <li>search button that verifies input</li>
       </ul>
