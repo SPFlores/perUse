@@ -33,7 +33,6 @@ const SearchPage = _ => {
   }
 
   searchState.locationFilter = _ => {
-    console.log('location dropdown appears')
     axios.get('/jobs')
       .then(({ data }) => {
         const locationsArr = data.jobs.map(job => job.location)
@@ -52,12 +51,20 @@ const SearchPage = _ => {
 
   searchState.typeFilter = _ => {
     console.log('type dropdown appears')
-    setSearchState({
-      ...searchState,
-      location: false,
-      type: true,
-      skills: false
-    })
+    axios.get('/jobs')
+      .then(({ data }) => {
+        const typeArr = data.jobs.map(job => job.job_type)
+        const realTypes = typeArr.filter(type => typeof type !== 'undefined')
+        const typeOptions = new Set(realTypes)
+        setSearchState({
+          ...searchState,
+          location: false,
+          type: true,
+          types: [...typeOptions],
+          skills: false
+        })
+      })
+      .catch(e => console.log(e))
   }
 
   searchState.skillsFilter = _ => {
@@ -70,9 +77,11 @@ const SearchPage = _ => {
   }
 
   searchState.getLocationOptions = _ => {
-    console.log('searchState.getLocationsOptions')
+    // console.log('searchState.getLocationsOptions')
     const listItems = searchState.locations.map(location =>
-      <button id={location} value={location} key={location}>{location}</button>
+      <div key={searchState.locations.indexOf(location)}>
+        <button id={location} key={location}>{location}</button>
+      </div>
     )
     return <ul>{listItems}</ul>
   }
