@@ -1,4 +1,5 @@
 import React from 'react'
+import JobCard from '../../components/JobCard'
 
 const SearchPage = _ => {
   return (
@@ -12,6 +13,7 @@ const SearchPage = _ => {
         <li>search button that verifies input</li>
       </ul>
       <p>Display all jobs matching search criteria, one card for each.</p>
+      <JobCard />
     </div>
   )
 }
