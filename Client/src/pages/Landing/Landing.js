@@ -4,8 +4,8 @@ const LandingPage = _ => {
   return (
     <div>
       <p>This is the landing page.</p>
-      <p>This is some text to show that it's working.</p>
-      <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Placeat vitae in, dolor assumenda, laudantium unde dolore rerum, corrupti repellat sequi provident quibusdam nisi. Explicabo dolor nesciunt voluptas nisi iure nam.</p>
+      <p>Displays "Welcome, NAME" if logged in.</p>
+      <p>Displays dummy text below about what the page is, what you can do. Offers buttons to sign up or login (Router).</p>
     </div>
   )
 }
