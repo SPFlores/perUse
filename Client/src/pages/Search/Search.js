@@ -32,23 +32,25 @@ const SearchPage = _ => {
       .catch(e => console.log(e))
   }
 
+  searchState.locationAxios = _ => {
+    axios.get('/jobs')
+      .then(({ data }) => {
+        const locationsArr = data.jobs.map(job => job.location)
+        const realLocations = locationsArr.filter(loc => typeof loc !== 'undefined')
+        const locationOptions = new Set(realLocations)
+        setSearchState({ ...searchState, locations: [...locationOptions] })
+      })
+      .catch(e => console.log(e))
+  }
+
   searchState.locationFilter = _ => {
-    // console.log('location dropdown appears')
+    console.log('location dropdown appears')
     setSearchState({
       ...searchState, location: true,
       type: false,
       skills: false
     })
-    axios.get('/jobs')
-      .then(({ data }) => {
-        const locationsArr = data.jobs.map(job => job.location)
-        const realLocations = locationsArr.filter(loc => typeof loc !== 'undefined')
-        // console.log(realLocations)
-        const locationOptions = new Set(realLocations)
-        // console.log(locationOptions)
-        setSearchState({ ...searchState, locations: [...locationOptions] })
-      })
-      .catch(e => console.log(e))
+    searchState.locationAxios()
   }
 
   searchState.typeFilter = _ => {
@@ -70,12 +72,11 @@ const SearchPage = _ => {
     })
   }
 
-  // searchState.renderDropdown = _ => {
-  //   return
-  //   <div id='locationChoices'>
-  //     {searchState.locations.map(location => <div><input type='radio' name='locationChoice' id={location} /><label>{location}</label></div>)}
-  //   </div>
-  // }
+  searchState.getLocationOptions = _ => {
+    console.log('searchState.getLocationsOptions')
+    const listItems = searchState.locations.map(location => <h1 key={location}>{location}</h1>)
+    return <ul>{listItems}</ul>
+  }
 
   return (
     <div>
@@ -84,11 +85,13 @@ const SearchPage = _ => {
         <li>text about the page</li>
         <button id='searchAll' onClick={searchState.handleSearchAll}>Display All Jobs</button>
         <li>Filter by:</li>
-        <button id='locationButton' onClick={searchState.locationFilter}>>Location</button>
+        <button id='locationButton' onClick={searchState.locationFilter}>Location</button>
         <button id='typeButton' onClick={searchState.typeFilter}>Type of Job</button>
-        <button id='skillsButton'onClick={searchState.skillsFilter}>Skills</button>
+        <button id='skillsButton' onClick={searchState.skillsFilter}>Skills</button>
 
-        {searchState.location ?  : searchState.type ? <h6>Type Dropdown</h6> : searchState.skills ? <h6>Skills Dropdown</h6> : null}
+        {/* searchState.getLocationOptions( */}
+
+        {searchState.location ? console.log('true') : searchState.type ? <h6>Type Dropdown</h6> : searchState.skills ? <h6>Skills Dropdown</h6> : console.log('none of the above')}
 
         <li>dynamically showing second dropdown for location, type, or skills (search all jobs, find listed attributes, put in new Set, display)</li>
         <li>search button that verifies input</li>
