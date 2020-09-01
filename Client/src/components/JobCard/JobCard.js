@@ -10,8 +10,8 @@ const JobCard = _ => {
       <li>Location</li>
       <li>Company</li>
       <li>Job type</li>
-      <li>Applicant type</li>
-      <li>skills tags</li>
+      <li>Applicants</li>
+      <li>Skills tags</li>
     </div>
   )
 }
