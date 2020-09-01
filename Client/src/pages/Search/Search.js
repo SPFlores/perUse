@@ -86,6 +86,16 @@ const SearchPage = _ => {
     return <ul>{listItems}</ul>
   }
 
+  searchState.getTypeOptions = _ => {
+    // console.log('searchState.getTypeOptions')
+    const listItems = searchState.types.map(type =>
+      <div key={searchState.types.indexOf(type)}>
+        <button id={type} key={type}>{type}</button>
+      </div>
+    )
+    return <ul>{listItems}</ul>
+  }
+
   return (
     <div>
       <p>This is the search page</p>
@@ -97,7 +107,7 @@ const SearchPage = _ => {
         <button id='typeButton' onClick={searchState.typeFilter}>Type of Job</button>
         <button id='skillsButton' onClick={searchState.skillsFilter}>Skills</button>
 
-        {searchState.location ? searchState.getLocationOptions() : searchState.type ? <h6>Type Dropdown</h6> : searchState.skills ? <h6>Skills Dropdown</h6> : null}
+        {searchState.location ? searchState.getLocationOptions() : searchState.type ? searchState.getTypeOptions() : searchState.skills ? <h6>Skills Dropdown</h6> : null}
 
         <li>dynamically showing second dropdown for location, type, or skills (search all jobs, find listed attributes, put in new Set, display)</li>
         <li>search button that verifies input</li>
