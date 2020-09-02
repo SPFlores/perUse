@@ -14,7 +14,8 @@ const ApplyPage = _ => {
   const coverLetter = useRef()
 
   const [applicationState, setApplicationState] = useState({
-    didApply: false
+    didApply: false,
+    isLoggedIn: false
   })
 
   applicationState.handleApply = e => {
@@ -22,6 +23,7 @@ const ApplyPage = _ => {
     // check the user is logged in
     if (sessionStorage.getItem('isLoggedIn') === 'true') {
       console.log('user is logged in')
+      setApplicationState({ ...applicationState, isLoggedIn: true })
       // check each box has text
       if (motivation.current.value === '' && coverLetter.current.value === '') {
         console.log('both empty')
@@ -39,11 +41,12 @@ const ApplyPage = _ => {
         }
         const applicationString = qs.stringify(applicationInfo)
         const headers = {
-          'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
-          'Authorization': token
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+            'Authorization': token
+          }
         }
-        // sessionStorage.getItem('jobID')
-        axios.post(`/apply/${jobID}/${token}`, applicationInfo, headers)
+        axios.post(`/apply/${jobID}/${token}`, applicationString, headers)
           .then(_ => {
             setApplicationState({ ...applicationState, didApply: true })
             console.log('hit apply post successfully')
@@ -51,11 +54,8 @@ const ApplyPage = _ => {
           .catch(e => console.log(e))
       }
     } else {
-      console.log('user is not logged in')
+      setApplicationState({ ...applicationState, isLoggedIn: false })
     }
-    console.log('you applied!')
-    console.log(motivation.current.value)
-    console.log(coverLetter.current.value)
   }
 
   return (
