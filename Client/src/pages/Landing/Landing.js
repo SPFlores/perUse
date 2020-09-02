@@ -12,7 +12,6 @@ const LandingPage = _ => {
         <li>Validate user after login/signup and store token and name in session storage</li>
         <li>style everything</li>
       </ul> */}
-      <p>Offers buttons to sign up or login (Router).</p>
       <div>
         <Link to='/search'>
           <button>Search</button>
