@@ -30,11 +30,19 @@ const LoginPage = _ => {
       sessionStorage.setItem('isLoggedIn', false)
     } else if (username.current.value === '') {
       console.log('big bad user yar')
-      setUserState({ ...userState, failedLoginUsername: true })
+      setUserState({
+        ...userState,
+        failedLoginUsername: true,
+        failedLoginPassword: false
+      })
       sessionStorage.setItem('isLoggedIn', false)
     } else if (password.current.value === '') {
       console.log('big bad password yar')
-      setUserState({ ...userState, failedLoginPassword: true })
+      setUserState({
+        ...userState,
+        failedLoginUsername: false,
+        failedLoginPassword: true
+      })
       sessionStorage.setItem('isLoggedIn', false)
     } else {
       axios.post('/login', {
@@ -58,10 +66,13 @@ const LoginPage = _ => {
       <form>
         <h5>Login To Your Account</h5>
         <div>
+          {userState.failedLoginUsername ? console.log('username alert') : null}
           <label htmlFor='username'>Username</label>
           <input type='text' id='username' name='username' ref={username} />
         </div>
-        <div><label htmlFor='password'>Password</label>
+        <div>
+          {userState.failedLoginPassword ? console.log('password alert') : null}
+          <label htmlFor='password'>Password</label>
           <input type='text' id='password' name='password' ref={password} />
         </div>
         {/* checkbox for "remember me" that sets local storage */}
