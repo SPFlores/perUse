@@ -17,11 +17,9 @@ const ApplyPage = _ => {
 
   applicationState.handleApply = e => {
     e.preventDefault()
-    // check the user is logged in
     if (sessionStorage.getItem('isLoggedIn') === 'true') {
       console.log('user is logged in')
       setApplicationState({ ...applicationState, isLoggedIn: true })
-      // check each box has text
       if (motivation.current.value === '' && coverLetter.current.value === '') {
         setApplicationState({
           ...applicationState,
