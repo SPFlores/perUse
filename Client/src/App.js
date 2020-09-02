@@ -5,6 +5,7 @@ import LogIn from './pages/Login'
 import SignUp from './pages/Signup'
 import Search from './pages/Search'
 import Navbar from './components/Navbar'
+import Apply from './pages/Apply'
 import './App.css'
 
 const App = _ => {
@@ -15,6 +16,7 @@ const App = _ => {
       <Route path='/login' render={_ => (<LogIn />)} />
       <Route path='/signup' render={_ => (<SignUp />)} />
       <Route path='/search' render={_ => (<Search />)} />
+      <Route path='/apply' render={_ => (<Apply />)} />
     </Router>
   )
 }

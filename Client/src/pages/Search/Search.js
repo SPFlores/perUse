@@ -135,13 +135,9 @@ const SearchPage = _ => {
 
   searchState.handleApply = _ => {
     console.log('want to apply')
-    // set job ID in session storage upon click
+    // set job ID, title in session storage upon click
     // link to Apply page
-    // Apply takes job ID from session storage
-    // displays 2 input boxes: motivation, cover letter
-    // submit button validates both
-    // axios request to API to apply
-    // pull user token from session storage
+
   }
 
   searchState.renderCards = _ => {
