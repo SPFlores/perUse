@@ -84,14 +84,12 @@ const SignupPage = _ => {
         name: name.current.value
       })
         .then(_ => {
-          console.log('user is signed up')
-          sessionStorage.setItem('isLoggedIn', true)
-          sessionStorage.setItem('userName', name.current.value)
           axios.post('/login', {
             username: username.current.value,
             password: password.current.value
           })
             .then(({ data }) => {
+              sessionStorage.setItem('userName', name.current.value)
               sessionStorage.setItem('isLoggedIn', true)
               sessionStorage.setItem('token', data.token)
               setNewUserState({ ...newUserState, isLoggedIn: true })
