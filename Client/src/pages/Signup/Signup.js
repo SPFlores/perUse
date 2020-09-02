@@ -3,7 +3,6 @@ import { Link, Redirect } from 'react-router-dom'
 import axios from 'axios'
 
 const SignupPage = _ => {
-
   const name = useRef()
   const username = useRef()
   const password = useRef()
