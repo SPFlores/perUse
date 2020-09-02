@@ -3,11 +3,15 @@ import { Link } from 'react-router-dom'
 
 const LandingPage = _ => {
   const [landingState, setLandingState] = useState({
-    name: ''
+    isLoggedIn: false
   })
 
   useEffect(_ => {
-    setLandingState({ ...landingState, name: sessionStorage.getItem('userName') })
+    if (sessionStorage.getItem('isLoggedIn') === 'true') {
+      setLandingState({ ...landingState, isLoggedIn: sessionStorage.getItem('isLoggedIn') })
+    } else {
+      setLandingState({ ...landingState, isLoggedIn: false })
+    }
   }, [])
 
   return (
@@ -23,14 +27,17 @@ const LandingPage = _ => {
           <button>Search</button>
         </Link>
       </div>
-      <div>
-        <Link to='/login'>
-          <button>Login</button>
-        </Link>
-        <Link to='/signup'>
-          <button>Signup</button>
-        </Link>
-      </div>
+      {landingState.isLoggedIn
+        ? null
+        : <div>
+          <Link to='/login'>
+            <button>Login</button>
+          </Link>
+          <Link to='/signup'>
+            <button>Signup</button>
+          </Link>
+        </div>
+      }
     </div>
   )
 }
