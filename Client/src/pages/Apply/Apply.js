@@ -42,10 +42,8 @@ const ApplyPage = _ => {
           failedCover: true
         })
       } else {
-        const token = 'Shh secret token'
-        // sessionStorage.getItem('token')
-        const jobID = '2'
-        // sessionStorage.getItem('jobID')
+        const token = sessionStorage.getItem('token')
+        const jobID = sessionStorage.getItem('jobID')
         const applicationInfo = {
           'motivation': motivation.current.value,
           'cover_letter': coverLetter.current.value
@@ -72,7 +70,7 @@ const ApplyPage = _ => {
   return (
     <div>
       <div>
-        <p>Apply for {sessionStorage.getItem('jobTitle')}}</p>
+        <p>Apply for {sessionStorage.getItem('title')}</p>
         {applicationState.failedBoth ? <p style={{ color: 'red' }}>Please enter your information!</p> : null}
         {applicationState.failedMotivation ? <p style={{ color: 'red' }}>Please enter your motivation!</p> : null}
         <label htmlFor='motivation'>Motivation</label>
