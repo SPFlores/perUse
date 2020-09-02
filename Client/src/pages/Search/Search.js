@@ -18,7 +18,7 @@ const SearchPage = _ => {
   useEffect(_ => {
     if (sessionStorage.getItem('isLoggedIn') === 'true') {
       setSearchState({ ...searchState, ableToApply: true })
-    } else if (sessionStorage.getItem('isLoggedIn') === 'false') {
+    } else {
       setSearchState({ ...searchState, ableToApply: false })
     }
   }, [])
