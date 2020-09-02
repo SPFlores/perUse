@@ -19,7 +19,9 @@ const LandingPage = _ => {
         : null}
       <p>Displays dummy text below about what the page is, what you can do.</p>
       {/* <ul>To Do
-        <li>Validate user after login/signup and store token and name in session storage</li>
+        <li>Pass token to apply</li>
+        <li>Pass jobID to apply</li>
+        <li>Navbar functionality</li>
         <li>style everything</li>
       </ul> */}
       <div>
