@@ -3,19 +3,16 @@ import { Link } from 'react-router-dom'
 import qs from 'qs'
 import axios from 'axios'
 
-// Apply takes job ID, title from session storage
-// displays 2 input boxes: motivation, cover letter
-// submit button validates both
-// axios request to API to apply
-// pull user token from session storage
-
 const ApplyPage = _ => {
   const motivation = useRef()
   const coverLetter = useRef()
 
   const [applicationState, setApplicationState] = useState({
     didApply: false,
-    isLoggedIn: false
+    isLoggedIn: false,
+    failedBoth: false,
+    failedMotivation: false,
+    failedCover: false
   })
 
   applicationState.handleApply = e => {
@@ -26,15 +23,31 @@ const ApplyPage = _ => {
       setApplicationState({ ...applicationState, isLoggedIn: true })
       // check each box has text
       if (motivation.current.value === '' && coverLetter.current.value === '') {
-        console.log('both empty')
+        setApplicationState({
+          ...applicationState,
+          failedBoth: true,
+          failedMotivation: false,
+          failedCover: false
+        })
       } else if (motivation.current.value === '') {
-        console.log('you need motivation')
+        setApplicationState({
+          ...applicationState,
+          failedBoth: false,
+          failedMotivation: true,
+          failedCover: false
+        })
       } else if (coverLetter.current.value === '') {
-        console.log('cover that damn letter')
+        setApplicationState({
+          ...applicationState,
+          failedBoth: false,
+          failedMotivation: false,
+          failedCover: true
+        })
       } else {
         const token = 'Shh secret token'
         // sessionStorage.getItem('token')
         const jobID = '2'
+        // sessionStorage.getItem('jobID')
         const applicationInfo = {
           'motivation': motivation.current.value,
           'cover_letter': coverLetter.current.value
@@ -61,11 +74,14 @@ const ApplyPage = _ => {
   return (
     <div>
       <div>
-        <p>Apply for "title of job"</p>
+        <p>Apply for {sessionStorage.getItem('jobTitle')}}</p>
+        {applicationState.failedBoth ? <p style={{ color: 'red' }}>Please enter your information!</p> : null}
+        {applicationState.failedMotivation ? <p style={{ color: 'red' }}>Please enter your motivation!</p> : null}
         <label htmlFor='motivation'>Motivation</label>
         <br />
         <input type='text' name='motivation' id='motivation' ref={motivation} />
         <br />
+        {applicationState.failedCover ? <p style={{ color: 'red' }}>Please enter your cover letter!</p> : null}
         <label htmlFor='coverLetter'>Cover letter</label>
         <br />
         <input type='text' name='coverLetter' id='coverLetter' ref={coverLetter} />
