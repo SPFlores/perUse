@@ -10,8 +10,17 @@ const SearchPage = _ => {
     skills_tags: [],
     type: false,
     types: [],
-    renderCount: 0
+    renderCount: 0,
+    ableToApply: false
   })
+
+  useEffect(_ => {
+    if (sessionStorage.getItem('isLoggedIn') === 'true') {
+      setSearchState({ ...searchState, ableToApply: true })
+    } else if (sessionStorage.getItem('isLoggedIn') === 'false') {
+      setSearchState({ ...searchState, ableToApply: false })
+    }
+  }, [])
 
   useEffect(_ => {
     searchState.jobs.forEach(_ => setSearchState({ ...searchState, renderCount: searchState.renderCount + 1 }))
@@ -124,6 +133,17 @@ const SearchPage = _ => {
     return <ul>{listItems}</ul>
   }
 
+  searchState.handleApply = _ => {
+    console.log('want to apply')
+    // set job ID in session storage upon click
+    // link to Apply page
+    // Apply takes job ID from session storage
+    // displays 2 input boxes: motivation, cover letter
+    // submit button validates both
+    // axios request to API to apply
+    // pull user token from session storage
+  }
+
   searchState.renderCards = _ => {
     const jobCards = searchState.jobs.map(job =>
       <div key={job.id}>
@@ -135,7 +155,12 @@ const SearchPage = _ => {
         <div dangerouslySetInnerHTML={{ __html: job.description }} />
         <p>Skills: {job.skills_tag.join(', ')}</p>
         <p>Applicant count: {job.applicant_count}</p>
-        <button>Apply</button>
+        {searchState.ableToApply
+          ? <button onClick={searchState.handleApply}>Apply</button>
+          : <div style={{ color: 'red' }}>
+            <p>Please sign in to apply!</p>
+          </div>
+        }
       </div>)
     return <ul>{jobCards}</ul>
   }
