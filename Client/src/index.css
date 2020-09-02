@@ -1,9 +1,9 @@
 ul#navBar {
   list-style-type: none;
-  margin: 0;
-  padding: 0;
+  margin: 0px;
+  padding: 3px;
   overflow: hidden;
-  background-color: black
+  background-color: #262425
 }
 
 li.navLILeft {
@@ -22,8 +22,68 @@ li a.navLink {
   text-decoration: none;
 }
 
-li a:hover {
-  background-color: #111;
+.navLILeft:hover {
+  background-color: #26bfb3;
+}
+
+.navLIRight:hover {
+  background-color: #ef6461;
+}
+
+#mainTitle {
+  color: #5628e2;
+  text-align: center;
+}
+
+#landingText {
+  color: #262425;
+}
+
+button {
+  margin-top: 15px;
+  line-height: 30px;
+}
+
+#searchingButton {
+  color: #262425;
+  background: #26bfb3;
+  border: #26bfb3;
+  display: block;
+  margin: auto;
+  height: 40px;
+  width: 15%;
+  align-content: center;
+}
+
+#searchingButton:hover {
+  box-shadow: 0 5px #262425;
+  transform: translateY(4px);
+  transition: all 0.5s;
+}
+
+#searchingButton h5 {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+#readyButton h5:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+#readyButton:hover h5 {
+  padding-right: 25px;
+}
+
+#readyButton:hover h5:after {
+  opacity: 1;
+  right: 0;
 }
 
 body {
