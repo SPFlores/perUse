@@ -39,15 +39,10 @@ li a.navLink {
   color: #262425;
 }
 
-button {
-  margin-top: 15px;
-  line-height: 30px;
-}
-
 #searchingButton {
-  color: #262425;
-  background: #26bfb3;
-  border: #26bfb3;
+  color: white;
+  background: #5628e2;
+  border: #5628e2;
   display: block;
   margin: auto;
   height: 40px;
@@ -59,31 +54,6 @@ button {
   box-shadow: 0 5px #262425;
   transform: translateY(4px);
   transition: all 0.5s;
-}
-
-#searchingButton h5 {
-  cursor: pointer;
-  display: inline-block;
-  position: relative;
-  transition: 0.5s;
-}
-
-#readyButton h5:after {
-  content: '\00bb';
-  position: absolute;
-  opacity: 0;
-  top: 0;
-  right: -20px;
-  transition: 0.5s;
-}
-
-#readyButton:hover h5 {
-  padding-right: 25px;
-}
-
-#readyButton:hover h5:after {
-  opacity: 1;
-  right: 0;
 }
 
 body {
