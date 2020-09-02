@@ -8,9 +8,9 @@ const LandingPage = _ => {
 
   useEffect(_ => {
     if (sessionStorage.getItem('isLoggedIn') === 'true') {
-      setLandingState({ ...landingState, isLoggedIn: sessionStorage.getItem('isLoggedIn') })
+      setLandingState({ ...landingState, isLoggedIn: true })
     } else {
-      setLandingState({ ...landingState, isLoggedIn: false })
+      sessionStorage.setItem('isLoggedIn', false)
     }
   }, [])
 
@@ -19,7 +19,6 @@ const LandingPage = _ => {
       <h1>perUse</h1>
       <p>Displays dummy text below about what the page is, what you can do.</p>
       {/* <ul>To Do
-        <li>Navbar functionality</li>
         <li>style everything</li>
       </ul> */}
       <div>
@@ -27,17 +26,6 @@ const LandingPage = _ => {
           <button>Search</button>
         </Link>
       </div>
-      {landingState.isLoggedIn
-        ? null
-        : <div>
-          <Link to='/login'>
-            <button>Login</button>
-          </Link>
-          <Link to='/signup'>
-            <button>Signup</button>
-          </Link>
-        </div>
-      }
     </div>
   )
 }
