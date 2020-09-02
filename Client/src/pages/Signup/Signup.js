@@ -7,13 +7,15 @@ const SignupPage = _ => {
   const name = useRef()
   const username = useRef()
   const password = useRef()
+  const passwordConf = useRef()
 
   const [newUserState, setNewUserState] = useState({
     isLoggedIn: false,
     failedAll: false,
     failedSignupName: false,
     failedSignupUsername: false,
-    failedSignupPassword: false
+    failedSignupPassword: false,
+    failedConfirmPassword: false
   })
 
   newUserState.renderRedirect = _ => {
@@ -97,9 +99,14 @@ const SignupPage = _ => {
           <input type='text' id='username' name='username' ref={username} />
         </div>
         <div>
-          {newUserState.failedSignupPassword ? <p style={{ color: 'red' }}>Please enter your password!</p> : null}
+          {newUserState.failedSignupPassword ? <p style={{ color: 'red' }}>Please enter a password!</p> : null}
           <label htmlFor='password'>Password</label>
           <input type='text' id='password' name='password' ref={password} />
+        </div>
+        <div>
+          {newUserState.failedConfirmPassword ? <p style={{ color: 'red' }}>Your passwords do not match!</p> : null}
+          <label htmlFor='passwordConf'>Password</label>
+          <input type='text' id='passwordConf' name='passwordConf' ref={passwordConf} />
         </div>
         <button onClick={newUserState.handleSignUpUser}>Submit</button>
       </form>
