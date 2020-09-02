@@ -12,8 +12,7 @@ module.exports = app => {
 
   app.post('/login', (req, res) => {
     axios.post('https://divercity-test.herokuapp.com/login', req.body)
-      .then(data => {
-        console.log(data.status)
+      .then(_ => {
         res.sendStatus(200)
       })
       .catch(e => console.log(e))
