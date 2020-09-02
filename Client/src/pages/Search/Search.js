@@ -133,11 +133,12 @@ const SearchPage = _ => {
     return <ul>{listItems}</ul>
   }
 
-  searchState.handleApply = _ => {
+  searchState.handleApply = e => {
+    e.preventDefault()
+    sessionStorage.setItem('jobID', e.target.id)
+    sessionStorage.setItem('title', e.target.dataset.title)
     console.log('want to apply')
-    // set job ID, title in session storage upon click
-    // link to Apply page
-
+    window.location.href = '/apply'
   }
 
   searchState.renderCards = _ => {
@@ -152,7 +153,7 @@ const SearchPage = _ => {
         <p>Skills: {job.skills_tag.join(', ')}</p>
         <p>Applicant count: {job.applicant_count}</p>
         {searchState.ableToApply
-          ? <button onClick={searchState.handleApply}>Apply</button>
+          ? <button id={job.id} data-title={job.title} onClick={searchState.handleApply}>Apply</button>
           : <div style={{ color: 'red' }}>
             <p>Please sign in to apply!</p>
           </div>
