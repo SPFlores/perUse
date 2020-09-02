@@ -21,7 +21,7 @@ const LoginPage = _ => {
   userState.handleLogInUser = e => {
     e.preventDefault()
     if (username.current.value === '' && password.current.value === '') {
-      console.log('major yar at your service captain sarcasm')
+      // console.log('major yar at your service captain sarcasm')
       setUserState({
         ...userState,
         failedLoginUsername: true,
@@ -29,7 +29,7 @@ const LoginPage = _ => {
       })
       sessionStorage.setItem('isLoggedIn', false)
     } else if (username.current.value === '') {
-      console.log('big bad user yar')
+      // console.log('big bad user yar')
       setUserState({
         ...userState,
         failedLoginUsername: true,
@@ -37,7 +37,7 @@ const LoginPage = _ => {
       })
       sessionStorage.setItem('isLoggedIn', false)
     } else if (password.current.value === '') {
-      console.log('big bad password yar')
+      // console.log('big bad password yar')
       setUserState({
         ...userState,
         failedLoginUsername: false,
@@ -50,7 +50,7 @@ const LoginPage = _ => {
         password: password.current.value
       })
         .then(_ => {
-          console.log('user is signed in')
+          // console.log('user is signed in')
           sessionStorage.setItem('isLoggedIn', true)
           setUserState({ ...userState, isLoggedIn: true })
         })
@@ -66,12 +66,12 @@ const LoginPage = _ => {
       <form>
         <h5>Login To Your Account</h5>
         <div>
-          {userState.failedLoginUsername ? console.log('username alert') : null}
+          {userState.failedLoginUsername ? <p style={{ color: 'red' }}>Please enter your username!</p> : null}
           <label htmlFor='username'>Username</label>
           <input type='text' id='username' name='username' ref={username} />
         </div>
         <div>
-          {userState.failedLoginPassword ? console.log('password alert') : null}
+          {userState.failedLoginPassword ? <p style={{ color: 'red' }}>Please enter your password!</p> : null}
           <label htmlFor='password'>Password</label>
           <input type='text' id='password' name='password' ref={password} />
         </div>
