@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react'
-import { Redirect } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import axios from 'axios'
 
 const LoginPage = _ => {
@@ -62,7 +62,10 @@ const LoginPage = _ => {
     <div>
       {userState.isLoggedIn ? userState.renderRedirect() : null}
 
-      <p>This is the login page</p>      <li>Text about logging in</li>
+      <div>
+        <p>Log in to get the most out of perUse!</p>
+      </div>
+
       <form>
         <h5>Login To Your Account</h5>
         <div>
@@ -82,6 +85,11 @@ const LoginPage = _ => {
         </div> */}
         <button onClick={userState.handleLogInUser}>Submit</button>
       </form>
+
+      <h5>Don't have an account? No problem!</h5>
+      <Link to='/signup'>
+        <button>Sign Up</button>
+      </Link>
     </div>
   )
 }
