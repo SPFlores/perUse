@@ -9,11 +9,12 @@ const LoginPage = _ => {
   const [userState, setUserState] = useState({
     isLoggedIn: false,
     failedLoginUsername: false,
-    failedLoginPassword: false
+    failedLoginPassword: false,
+    token: ''
   })
 
   userState.renderRedirect = _ => {
-    if (userState.isLoggedIn) {
+    if (userState.token.length > 0) {
       return <Redirect to='/' />
     }
   }
@@ -50,11 +51,15 @@ const LoginPage = _ => {
         password: password.current.value
       })
         .then(({ data }) => {
-          sessionStorage.setItem('isLoggedIn', true)
-          sessionStorage.setItem('token', data.token)
-          setUserState({ ...userState, isLoggedIn: true })
+          if (data.token) {
+            sessionStorage.setItem('isLoggedIn', true)
+            sessionStorage.setItem('token', data.token)
+            setUserState({ ...userState, token: data.token, isLoggedIn: true })
+          }
         })
-        .catch(e => console.log(e))
+        .catch(_ => {
+          setUserState({ ...userState, isLoggedIn: false })
+        })
     }
   }
 

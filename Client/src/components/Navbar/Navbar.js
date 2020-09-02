@@ -9,14 +9,17 @@ const Navbar = _ => {
 
   useEffect(_ => {
     if (sessionStorage.getItem('isLoggedIn') === 'true') {
-      setNavbarState({ ...navbarState, isLoggedIn: true })
+      setNavbarState({ ...navbarState, isLoggedIn: true, loggedOut: false })
+      console.log('set to true')
+    } else {
+      setNavbarState({ ...navbarState, isLoggedIn: false, loggedOut: true })
+      console.log('set to false')
     }
   }, [])
 
   navbarState.handleLogout = e => {
-    // e.preventDefault()
     console.log('you have logged out')
-    // setNavbarState({ ...navbarState, isLoggedIn: false })
+    setNavbarState({ ...navbarState, isLoggedIn: false })
     sessionStorage.setItem('isLoggedIn', 'false')
     sessionStorage.setItem('token', '')
   }
@@ -25,14 +28,16 @@ const Navbar = _ => {
     <ul id='navBar'>
       <li class='navLILeft'><a class='navLink' href='/'>Home</a></li>
       <li class='navLILeft'><a class='navLink' href='/search'>Search</a></li>
-      {sessionStorage.getItem('isLoggedIn') === 'true'
+      {navbarState.isLoggedIn
         ? <li class='navLIRight'><a class='navLink' href='/' onClick={navbarState.handleLogout}>Logout</a></li> : null}
-      {sessionStorage.getItem('isLoggedIn') === 'false' || null
+      {navbarState.loggedOut
         ? <li class='navLIRight'><a class='navLink' href='/signup'>Signup</a></li>
-        : null}
-      {sessionStorage.getItem('isLoggedIn') === 'false' || null
+        : null
+      }
+      {navbarState.loggedOut
         ? <li class='navLIRight'><a class='navLink' href='/login'>Login</a></li>
-        : null}
+        : null
+      }
     </ul>
   )
 }
