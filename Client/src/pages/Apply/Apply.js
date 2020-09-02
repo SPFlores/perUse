@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react'
+import { Link } from 'react-router-dom'
 import qs from 'qs'
 import axios from 'axios'
 
@@ -13,7 +14,7 @@ const ApplyPage = _ => {
   const coverLetter = useRef()
 
   const [applicationState, setApplicationState] = useState({
-    user: ''
+    didApply: false
   })
 
   applicationState.handleApply = e => {
@@ -33,8 +34,8 @@ const ApplyPage = _ => {
         // sessionStorage.getItem('token')
         const jobID = '2'
         const applicationInfo = {
-          motivation: motivation.current.value,
-          cover_letter: coverLetter.current.value
+          'motivation': motivation.current.value,
+          'cover_letter': coverLetter.current.value
         }
         const applicationString = qs.stringify(applicationInfo)
         const headers = {
@@ -42,10 +43,9 @@ const ApplyPage = _ => {
           'Authorization': token
         }
         // sessionStorage.getItem('jobID')
-        axios.post(`/apply/${jobID}/${token}`, applicationString, headers)
+        axios.post(`/apply/${jobID}/${token}`, applicationInfo, headers)
           .then(_ => {
-            // display textbox saying applied
-            // show button linking back to search
+            setApplicationState({ ...applicationState, didApply: true })
             console.log('hit apply post successfully')
           })
           .catch(e => console.log(e))
@@ -60,16 +60,27 @@ const ApplyPage = _ => {
 
   return (
     <div>
-      <p>Apply for "title of job"</p>
-      <label htmlFor='motivation'>Motivation</label>
-      <br />
-      <input type='text' name='motivation' id='motivation' ref={motivation} />
-      <br />
-      <label htmlFor='coverLetter'>Cover letter</label>
-      <br />
-      <input type='text' name='coverLetter' id='coverLetter' ref={coverLetter} />
-      <br />
-      <button onClick={applicationState.handleApply}>Apply!</button>
+      <div>
+        <p>Apply for "title of job"</p>
+        <label htmlFor='motivation'>Motivation</label>
+        <br />
+        <input type='text' name='motivation' id='motivation' ref={motivation} />
+        <br />
+        <label htmlFor='coverLetter'>Cover letter</label>
+        <br />
+        <input type='text' name='coverLetter' id='coverLetter' ref={coverLetter} />
+        <br />
+        <button onClick={applicationState.handleApply}>Apply!</button>
+      </div>
+      <div>
+        {applicationState.didApply
+          ? <div>
+            <p>You have applied. Good luck!</p>
+            <Link to='/search'>
+              <button>Back to search</button>
+            </Link>
+          </div> : null}
+      </div>
     </div>
   )
 }

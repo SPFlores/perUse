@@ -13,7 +13,6 @@ module.exports = app => {
       })
       .catch(e => {
         console.log(e)
-        console.log(e.config)
       }
       )
   })
