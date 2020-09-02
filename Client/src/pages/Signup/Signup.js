@@ -39,7 +39,8 @@ const SignupPage = _ => {
         failedAll: false,
         failedSignupName: true,
         failedSignupUsername: false,
-        failedSignupPassword: false
+        failedSignupPassword: false,
+        failedConfirmPassword: false
       })
       sessionStorage.setItem('isLoggedIn', false)
     } else if (username.current.value === '') {
@@ -49,7 +50,8 @@ const SignupPage = _ => {
         failedAll: false,
         failedSigupName: false,
         failedSignupUsername: true,
-        failedSignupPassword: false
+        failedSignupPassword: false,
+        failedConfirmPassword: false
       })
       sessionStorage.setItem('isLoggedIn', false)
     } else if (password.current.value === '') {
@@ -59,14 +61,26 @@ const SignupPage = _ => {
         failedAll: false,
         failedSignupnName: false,
         failedSignupUsername: false,
-        failedSignupPassword: true
+        failedSignupPassword: true,
+        failedConfirmPassword: false
+      })
+      sessionStorage.setItem('isLoggedIn', false)
+    } else if (password.current.value !== passwordConf.current.value) {
+      console.log('passwords dont match')
+      setNewUserState({
+        ...newUserState,
+        failedAll: false,
+        failedSignupnName: false,
+        failedSignupUsername: false,
+        failedSignupPassword: false,
+        failedConfirmPassword: true
       })
       sessionStorage.setItem('isLoggedIn', false)
     } else {
       axios.post('/signup', {
         username: username.current.value,
         password: password.current.value,
-        name: name.current.vlue
+        name: name.current.value
       })
         .then(_ => {
           console.log('user is signed up')
@@ -101,12 +115,12 @@ const SignupPage = _ => {
         <div>
           {newUserState.failedSignupPassword ? <p style={{ color: 'red' }}>Please enter a password!</p> : null}
           <label htmlFor='password'>Password</label>
-          <input type='text' id='password' name='password' ref={password} />
+          <input type='password' id='password' name='password' ref={password} />
         </div>
         <div>
           {newUserState.failedConfirmPassword ? <p style={{ color: 'red' }}>Your passwords do not match!</p> : null}
           <label htmlFor='passwordConf'>Password</label>
-          <input type='text' id='passwordConf' name='passwordConf' ref={passwordConf} />
+          <input type='password' id='passwordConf' name='passwordConf' ref={passwordConf} />
         </div>
         <button onClick={newUserState.handleSignUpUser}>Submit</button>
       </form>

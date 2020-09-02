@@ -3,8 +3,8 @@ const axios = require('axios')
 module.exports = app => {
   app.post('/signup', (req, res) => {
     axios.post('https://divercity-test.herokuapp.com/register', req.body)
-      .then(_ => {
-        console.log('user added')
+      .then(data => {
+        console.log(data)
         res.sendStatus(200)
       })
       .catch(e => console.log(e))
