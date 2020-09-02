@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import axios from 'axios'
 
 const SearchPage = _ => {
@@ -137,7 +138,6 @@ const SearchPage = _ => {
     e.preventDefault()
     sessionStorage.setItem('jobID', e.target.id)
     sessionStorage.setItem('title', e.target.dataset.title)
-    console.log('want to apply')
     window.location.href = '/apply'
   }
 
@@ -154,8 +154,14 @@ const SearchPage = _ => {
         <p>Applicant count: {job.applicant_count}</p>
         {searchState.ableToApply
           ? <button id={job.id} data-title={job.title} onClick={searchState.handleApply}>Apply</button>
-          : <div style={{ color: 'red' }}>
-            <p>Please sign in to apply!</p>
+          : <div>
+            <p style={{ color: 'red' }}>Please log in/sign up to apply!</p>
+            <Link to='/login'>
+              <button>Login</button>
+            </Link>
+            <Link to='/signup'>
+              <button>Sign Up</button>
+            </Link>
           </div>
         }
       </div>)

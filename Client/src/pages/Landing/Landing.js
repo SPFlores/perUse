@@ -16,8 +16,6 @@ const LandingPage = _ => {
       <h1>perUse</h1>
       <p>Displays dummy text below about what the page is, what you can do.</p>
       {/* <ul>To Do
-        <li>Pass token to apply</li>
-        <li>Pass jobID to apply</li>
         <li>Navbar functionality</li>
         <li>style everything</li>
       </ul> */}
