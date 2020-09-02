@@ -1,7 +1,7 @@
 const axios = require('axios')
 
 module.exports = app => {
-  app.post('/signup', (req, res) => {
+  app.post('/register', (req, res) => {
     axios.post('https://divercity-test.herokuapp.com/register', req.body)
       .then(_ => {
         res.sendStatus(200)
@@ -11,8 +11,9 @@ module.exports = app => {
 
   app.post('/login', (req, res) => {
     axios.post('https://divercity-test.herokuapp.com/login', req.body)
-      .then(_ => {
-        res.sendStatus(200)
+      .then(({ data }) => {
+        res.json(data)
+        // res.sendStatus(200)
       })
       .catch(e => console.log(e))
   })

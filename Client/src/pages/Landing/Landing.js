@@ -8,7 +8,6 @@ const LandingPage = _ => {
       {/* <h4>Welcome, NAME</h4> */}
       <p>Displays dummy text below about what the page is, what you can do.</p>
       {/* <ul>To Do
-        <li>develop apply page in basic terms, linking from Apply button on Search page</li>
         <li>Validate user after login/signup and store token and name in session storage</li>
         <li>style everything</li>
       </ul> */}

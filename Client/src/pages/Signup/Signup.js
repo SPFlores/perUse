@@ -77,7 +77,8 @@ const SignupPage = _ => {
       })
       sessionStorage.setItem('isLoggedIn', false)
     } else {
-      axios.post('/signup', {
+      console.log('axios post /register call')
+      axios.post('/register', {
         username: username.current.value,
         password: password.current.value,
         name: name.current.value
@@ -85,7 +86,17 @@ const SignupPage = _ => {
         .then(_ => {
           console.log('user is signed up')
           sessionStorage.setItem('isLoggedIn', true)
-          setNewUserState({ ...newUserState, isLoggedIn: true })
+          sessionStorage.setItem('userName', name.current.value)
+          axios.post('/login', {
+            username: username.current.value,
+            password: password.current.value
+          })
+            .then(({ data }) => {
+              sessionStorage.setItem('isLoggedIn', true)
+              sessionStorage.setItem('token', data.token)
+              setNewUserState({ ...newUserState, isLoggedIn: true })
+            })
+            .catch(e => console.log(e))
         })
         .catch(e => console.log(e))
     }

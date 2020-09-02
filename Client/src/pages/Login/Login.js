@@ -49,9 +49,9 @@ const LoginPage = _ => {
         username: username.current.value,
         password: password.current.value
       })
-        .then(_ => {
-          // console.log('user is signed in')
+        .then(({ data }) => {
           sessionStorage.setItem('isLoggedIn', true)
+          sessionStorage.setItem('token', data.token)
           setUserState({ ...userState, isLoggedIn: true })
         })
         .catch(e => console.log(e))
