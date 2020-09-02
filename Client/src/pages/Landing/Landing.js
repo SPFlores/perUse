@@ -14,9 +14,6 @@ const LandingPage = _ => {
   return (
     <div>
       <h1>perUse</h1>
-      {landingState.name
-        ? <h4>Welcome, {landingState.name}!</h4>
-        : null}
       <p>Displays dummy text below about what the page is, what you can do.</p>
       {/* <ul>To Do
         <li>Pass token to apply</li>

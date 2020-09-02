@@ -89,7 +89,6 @@ const SignupPage = _ => {
             password: password.current.value
           })
             .then(({ data }) => {
-              sessionStorage.setItem('userName', name.current.value)
               sessionStorage.setItem('isLoggedIn', true)
               sessionStorage.setItem('token', data.token)
               setNewUserState({ ...newUserState, isLoggedIn: true })
