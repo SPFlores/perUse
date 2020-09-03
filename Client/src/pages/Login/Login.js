@@ -68,7 +68,7 @@ const LoginPage = _ => {
       {userState.isLoggedIn ? userState.renderRedirect() : null}
 
       <div>
-        <h4 id='logInPlease'>Log in to get the most out of perUse!</h4>
+        <h4 class='userPlease'>Log in to get the most out of perUse!</h4>
       </div>
 
       <form>

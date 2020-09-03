@@ -111,7 +111,7 @@ button.location, button.type, button.skills, .filterBtn {
   display: inline
 }
 
-#applicationTitle, #appSuccess, #logInPlease {
+#applicationTitle, #appSuccess, .userPlease {
   text-align: center;
   padding: 15px
 }
@@ -134,13 +134,13 @@ button.location, button.type, button.skills, .filterBtn {
   display: inline
 }
 
-.usernameEntry, .passwordEntry {
+.usernameEntry, .passwordEntry, #nameEntry {
   padding: 5px;
   margin: 5px;
   border: 1px solid #ef6461;
 }
 
-.loginPgBtn {
+.loginPgBtn, .signupBtn {
   background-color: #ef6461;
   color: white;
   border: #ef6461;
