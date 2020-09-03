@@ -17,7 +17,6 @@ const ApplyPage = _ => {
 
   applicationState.handleApply = e => {
     e.preventDefault()
-    console.log(motivation.current.value)
     if (sessionStorage.getItem('isLoggedIn') === 'true' && sessionStorage.getItem('token').length > 0) {
       console.log('user is logged in')
       setApplicationState({ ...applicationState, isLoggedIn: true })
@@ -43,25 +42,35 @@ const ApplyPage = _ => {
           failedCover: true
         })
       } else {
-        const token = sessionStorage.getItem('token')
-        const jobID = sessionStorage.getItem('jobID')
-        const applicationInfo = {
+        const application = qs.stringify({
           'motivation': motivation.current.value,
           'cover_letter': coverLetter.current.value
-        }
-        const applicationString = qs.stringify(applicationInfo)
-        const headers = {
+        })
+        const jobID = sessionStorage.getItem('jobID')
+        const token = sessionStorage.getItem('token')
+        const config = {
+          method: 'post',
+          url: `https://divercity-test.herokuapp.com/jobs/${jobID}/apply`,
           headers: {
-            'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
-            'Authorization': token
-          }
+            'Authorization': token,
+            'Content-Type': 'application/x-www-form-urlencoded'
+          },
+          data: application
         }
-        axios.post(`/apply/${jobID}/${token}`, applicationString, headers)
-          .then(_ => {
+
+        axios(config)
+          .then(({ data }) => {
+            console.log(data)
             setApplicationState({ ...applicationState, didApply: true })
-            console.log('hit apply post successfully')
           })
           .catch(e => console.log(e))
+          
+        // axios.post(`/apply/${jobID}/${token}`, applicationString, headers)
+        //   .then(_ => {
+        //     setApplicationState({ ...applicationState, didApply: true })
+        //     console.log('hit apply post successfully')
+        //   })
+        //   .catch(e => console.log(e))
       }
     } else {
       alert('please log in to apply')
