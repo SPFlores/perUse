@@ -112,7 +112,7 @@ const SignupPage = _ => {
           {newUserState.failedAll ? <p style={{ color: '#ef6461' }}>Please enter your information!</p> : null}
           {newUserState.failedSignupName ? <p style={{ color: '#ef6461' }}>Please enter your name!</p> : null}
           <label htmlFor='name'>Name: </label>
-          <input type='text' id='name' name='name' ref={name} id='nameEntry'/>
+          <input type='text' id='name' name='name' ref={name} id='nameEntry' />
         </div>
         <div>
           {newUserState.failedSignupUsername ? <p style={{ color: '#ef6461' }}>Please enter your username!</p> : null}
@@ -121,16 +121,18 @@ const SignupPage = _ => {
         </div>
         <div>
           {newUserState.failedSignupPassword ? <p style={{ color: '#ef6461' }}>Please enter a password!</p> : null}
-          <label htmlFor='password'>Password</label>
+          <label htmlFor='password'>Password: </label>
           <input type='password' id='password' name='password' ref={password} class='passwordEntry' />
         </div>
         <div>
           {newUserState.failedConfirmPassword ? <p style={{ color: 'red' }}>Your passwords do not match!</p> : null}
-          <label htmlFor='passwordConf'>Password</label>
+          <label htmlFor='passwordConf'>Password: </label>
           <input type='password' id='passwordConf' name='passwordConf' ref={passwordConf} class='passwordEntry' />
         </div>
         <button onClick={newUserState.handleSignUpUser} class='signupBtn'>Submit</button>
       </form>
+
+      <br />
 
       <h5>Already have an account? No problem!</h5>
       <Link to='/login'>
