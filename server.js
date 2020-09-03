@@ -9,4 +9,4 @@ app.use(express.json())
 
 require('./Routes')(app)
 
-app.listen(3003)
+app.listen(process.env.PORT || 3003)
