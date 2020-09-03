@@ -17,7 +17,8 @@ const ApplyPage = _ => {
 
   applicationState.handleApply = e => {
     e.preventDefault()
-    if (sessionStorage.getItem('isLoggedIn') === 'true') {
+    console.log(motivation.current.value)
+    if (sessionStorage.getItem('isLoggedIn') === 'true' && sessionStorage.getItem('token').length > 0) {
       console.log('user is logged in')
       setApplicationState({ ...applicationState, isLoggedIn: true })
       if (motivation.current.value === '' && coverLetter.current.value === '') {
@@ -63,6 +64,7 @@ const ApplyPage = _ => {
           .catch(e => console.log(e))
       }
     } else {
+      alert('please log in to apply')
       setApplicationState({ ...applicationState, isLoggedIn: false })
     }
   }
@@ -75,21 +77,21 @@ const ApplyPage = _ => {
         {applicationState.failedMotivation ? <p style={{ color: '#ef6461' }}>Please enter your motivation!</p> : null}
         <label htmlFor='motivation' >Motivation</label>
         <br />
-        <input type='text' name='motivation' id='motivation' ref={motivation} />
+        <textarea name='motivation' id='motivationInput' ref={motivation} />
         <br />
         {applicationState.failedCover ? <p style={{ color: '#ef6461' }}>Please enter your cover letter!</p> : null}
         <label htmlFor='coverLetter'>Cover letter</label>
         <br />
-        <input type='text' name='coverLetter' id='coverLetter' ref={coverLetter} />
+        <textarea name='coverLetter' id='coverLetterInput' ref={coverLetter} />
         <br />
-        <button onClick={applicationState.handleApply}>Apply!</button>
+        <button onClick={applicationState.handleApply} class='applicationBtn'>Apply!</button>
       </div>
       <div>
         {applicationState.didApply
           ? <div>
-            <p>You have applied. Good luck!</p>
+            <h6 id='appSuccess'>You have applied. Good luck!</h6>
             <Link to='/search'>
-              <button>Back to search</button>
+              <button class='applicationBtn'>Back to search</button>
             </Link>
           </div> : null}
       </div>

@@ -81,7 +81,7 @@ const LoginPage = _ => {
         <div>
           {userState.failedLoginPassword ? <p style={{ color: 'red' }}>Please enter your password!</p> : null}
           <label htmlFor='password'>Password</label>
-          <input type='text' id='password' name='password' ref={password} />
+          <input type='password' id='password' name='password' ref={password} />
         </div>
         {/* checkbox for "remember me" that sets local storage */}
         {/* <div>
