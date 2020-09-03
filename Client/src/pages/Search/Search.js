@@ -28,16 +28,31 @@ const SearchPage = _ => {
   }, [searchState.jobs])
 
   searchState.handleSearchAll = e => {
-    axios.get('/jobs')
+    const config = {
+      method: 'get',
+      url: 'https://divercity-test.herokuapp.com/jobs'
+    }
+
+    axios(config)
       .then(({ data }) => {
-        console.log(data.jobs)
         setSearchState({ ...searchState, jobs: data.jobs })
       })
       .catch(e => console.log(e))
+
+    // axios.get('/jobs')
+    //   .then(({ data }) => {
+    //     setSearchState({ ...searchState, jobs: data.jobs })
+    //   })
+    //   .catch(e => console.log(e))
   }
 
   searchState.locationFilter = _ => {
-    axios.get('/jobs')
+    const config = {
+      method: 'get',
+      url: 'https://divercity-test.herokuapp.com/jobs'
+    }
+
+    axios(config)
       .then(({ data }) => {
         const locationsArr = data.jobs.map(job => job.location)
         const realLocations = locationsArr.filter(loc => typeof loc !== 'undefined')
@@ -51,10 +66,30 @@ const SearchPage = _ => {
         })
       })
       .catch(e => console.log(e))
+
+    // axios.get('/jobs')
+    //   .then(({ data }) => {
+    //     const locationsArr = data.jobs.map(job => job.location)
+    //     const realLocations = locationsArr.filter(loc => typeof loc !== 'undefined')
+    //     const locationOptions = new Set(realLocations)
+    //     setSearchState({
+    //       ...searchState,
+    //       location: true,
+    //       locations: [...locationOptions],
+    //       type: false,
+    //       skills: false
+    //     })
+    //   })
+    //   .catch(e => console.log(e))
   }
 
   searchState.typeFilter = _ => {
-    axios.get('/jobs')
+    const config = {
+      method: 'get',
+      url: 'https://divercity-test.herokuapp.com/jobs'
+    }
+
+    axios(config)
       .then(({ data }) => {
         const typeArr = data.jobs.map(job => job.job_type)
         const realTypes = typeArr.filter(type => typeof type !== 'undefined')
@@ -68,10 +103,30 @@ const SearchPage = _ => {
         })
       })
       .catch(e => console.log(e))
+
+    // axios.get('/jobs')
+    //   .then(({ data }) => {
+    //     const typeArr = data.jobs.map(job => job.job_type)
+    //     const realTypes = typeArr.filter(type => typeof type !== 'undefined')
+    //     const typeOptions = new Set(realTypes)
+    //     setSearchState({
+    //       ...searchState,
+    //       location: false,
+    //       type: true,
+    //       types: [...typeOptions],
+    //       skills: false
+    //     })
+    //   })
+    //   .catch(e => console.log(e))
   }
 
   searchState.skillsFilter = _ => {
-    axios.get('/jobs')
+    const config = {
+      method: 'get',
+      url: 'https://divercity-test.herokuapp.com/jobs'
+    }
+
+    axios(config)
       .then(({ data }) => {
         const skillsRaw = data.jobs.map(job => job.skills_tag)
         const skillsArr = [].concat.apply([], skillsRaw)
@@ -86,12 +141,34 @@ const SearchPage = _ => {
         })
       })
       .catch(e => console.log(e))
+
+    // axios.get('/jobs')
+    //   .then(({ data }) => {
+    //     const skillsRaw = data.jobs.map(job => job.skills_tag)
+    //     const skillsArr = [].concat.apply([], skillsRaw)
+    //     const realSkills = skillsArr.filter(skill => typeof skill !== 'undefined')
+    //     const skillOptions = new Set(realSkills)
+    //     setSearchState({
+    //       ...searchState,
+    //       location: false,
+    //       type: false,
+    //       skills_tags: [...skillOptions],
+    //       skills: true
+    //     })
+    //   })
+    //   .catch(e => console.log(e))
   }
 
   searchState.filterJobs = ({ target }) => {
     const value = target.id
     const filter = target.className
-    axios.get('/jobs')
+
+    const config = {
+      method: 'get',
+      url: 'https://divercity-test.herokuapp.com/jobs'
+    }
+
+    axios(config)
       .then(({ data }) => {
         if (filter === 'location') {
           const validJobs = data.jobs.filter(job => { return job.location === value })
@@ -105,6 +182,21 @@ const SearchPage = _ => {
         } else console.log('not working')
       })
       .catch(e => console.log(e))
+
+    // axios.get('/jobs')
+    //   .then(({ data }) => {
+    //     if (filter === 'location') {
+    //       const validJobs = data.jobs.filter(job => { return job.location === value })
+    //       setSearchState({ ...searchState, jobs: validJobs })
+    //     } else if (filter === 'type') {
+    //       const validJobs = data.jobs.filter(job => { return job.job_type === value })
+    //       setSearchState({ ...searchState, jobs: validJobs })
+    //     } else if (filter === 'skills') {
+    //       const validJobs = data.jobs.filter(job => job.skills_tag.includes(value))
+    //       setSearchState({ ...searchState, jobs: validJobs })
+    //     } else console.log('not working')
+    //   })
+    //   .catch(e => console.log(e))
   }
 
   searchState.getLocationOptions = _ => {

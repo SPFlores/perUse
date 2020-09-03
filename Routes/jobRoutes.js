@@ -10,15 +10,4 @@ module.exports = app => {
       })
       .catch(e => console.log(e))
   })
-
-  //app.get('/jobs/:id', (req, res) => {
-  //axios.get('https://divercity-test.herokuapp.com/jobs')
-  //.then(({ data }) => {
-  //console.log(data)
-  //go through list, find all with given skills_tag
-  //res.sendStatus(200)
-  //})
-  //.catch(e => console.log(e))
-  //})
-
 }

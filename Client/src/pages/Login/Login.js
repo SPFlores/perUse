@@ -46,10 +46,17 @@ const LoginPage = _ => {
       })
       sessionStorage.setItem('isLoggedIn', false)
     } else {
-      axios.post('/login', {
+      const user = {
         username: username.current.value,
         password: password.current.value
-      })
+      }
+      const config = {
+        method: 'post',
+        url: 'https://divercity-test.herokuapp.com/login',
+        data: user
+      }
+
+      axios(config)
         .then(({ data }) => {
           if (data.token) {
             sessionStorage.setItem('isLoggedIn', true)
@@ -57,9 +64,25 @@ const LoginPage = _ => {
             setUserState({ ...userState, token: data.token, isLoggedIn: true })
           }
         })
-        .catch(_ => {
+        .catch(e => {
+          console.log(e)
           setUserState({ ...userState, isLoggedIn: false })
         })
+
+      // axios.post('/login', {
+      //   username: username.current.value,
+      //   password: password.current.value
+      // })
+      //   .then(({ data }) => {
+      //     if (data.token) {
+      //       sessionStorage.setItem('isLoggedIn', true)
+      //       sessionStorage.setItem('token', data.token)
+      //       setUserState({ ...userState, token: data.token, isLoggedIn: true })
+      //     }
+      //   })
+      //   .catch(_ => {
+      //     setUserState({ ...userState, isLoggedIn: false })
+      //   })
     }
   }
 
