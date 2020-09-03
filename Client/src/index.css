@@ -85,7 +85,7 @@ button.location, button.type, button.skills, .filterBtn {
 
 .jobCard {
   border-style: solid;
-  border-color: #ef6461;
+  border-color: #26bfb3;
   border-width: 5px;
   padding: 5px 15px 15px;
   margin-top: 20px;
@@ -103,15 +103,15 @@ button.location, button.type, button.skills, .filterBtn {
 }
 
 .notLoggedInBtn, .applyBtn {
-  background-color: #ef6461;
+  background-color: #26bfb3;
   color: white;
-  border: #ef6461;
+  border: #26bfb3;
   padding: 10px;
   margin: 10px;
   display: inline
 }
 
-#applicationTitle, #appSuccess {
+#applicationTitle, #appSuccess, #logInPlease {
   text-align: center;
   padding: 15px
 }
@@ -132,6 +132,20 @@ button.location, button.type, button.skills, .filterBtn {
   margin: 10px 0px 0px 0px;
   padding: 10px;
   display: inline
+}
+
+.usernameEntry, .passwordEntry {
+  padding: 5px;
+  margin: 5px;
+  border: 1px solid #ef6461;
+}
+
+.loginPgBtn {
+  background-color: #ef6461;
+  color: white;
+  border: #ef6461;
+  margin: 10px 0px;
+  padding: 10px;
 }
 
 body {

@@ -64,36 +64,38 @@ const LoginPage = _ => {
   }
 
   return (
-    <div>
+    <div class='mainArea'>
       {userState.isLoggedIn ? userState.renderRedirect() : null}
 
       <div>
-        <p>Log in to get the most out of perUse!</p>
+        <h4 id='logInPlease'>Log in to get the most out of perUse!</h4>
       </div>
 
       <form>
         <h5>Login To Your Account</h5>
         <div>
-          {userState.failedLoginUsername ? <p style={{ color: 'red' }}>Please enter your username!</p> : null}
-          <label htmlFor='username'>Username</label>
-          <input type='text' id='username' name='username' ref={username} />
+          {userState.failedLoginUsername ? <p style={{ color: '#ef6461' }}>Please enter your username!</p> : null}
+          <label htmlFor='username'>Username: </label>
+          <input type='text' id='username' name='username' ref={username} class='usernameEntry' />
         </div>
         <div>
-          {userState.failedLoginPassword ? <p style={{ color: 'red' }}>Please enter your password!</p> : null}
-          <label htmlFor='password'>Password</label>
-          <input type='password' id='password' name='password' ref={password} />
+          {userState.failedLoginPassword ? <p style={{ color: '#ef6461' }}>Please enter your password!</p> : null}
+          <label htmlFor='password'>Password: </label>
+          <input type='password' id='password' name='password' ref={password} class='passwordEntry' />
         </div>
         {/* checkbox for "remember me" that sets local storage */}
         {/* <div>
           <input type='checkbox' name='rememberMe' id='rememberMe' ref={rememberMe} />
           <label htmlFor='rememberMe'>Remember Me</label>
         </div> */}
-        <button onClick={userState.handleLogInUser}>Submit</button>
+        <button onClick={userState.handleLogInUser} class='loginPgBtn'>Submit</button>
       </form>
+
+      <br />
 
       <h5>Don't have an account? No problem!</h5>
       <Link to='/signup'>
-        <button>Sign Up</button>
+        <button class='loginPgBtn'>Sign Up</button>
       </Link>
     </div>
   )
