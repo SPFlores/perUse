@@ -15,7 +15,7 @@ const LandingPage = _ => {
   }, [])
 
   return (
-    <div>
+    <div class='mainArea'>
       <h1 id='mainTitle'>perUse</h1>
       <p id='landingText'>Welcome to perUse, the job site for U! Take a look at the jobs we host to see if any of them could be your next best fit! Be sure to sign in (or sign up) to get access to all of our functionality. Happy perUsing!</p>
       <div>

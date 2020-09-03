@@ -68,16 +68,16 @@ const ApplyPage = _ => {
   }
 
   return (
-    <div>
+    <div class='mainArea'>
       <div>
-        <p>Apply for {sessionStorage.getItem('title')}</p>
-        {applicationState.failedBoth ? <p style={{ color: 'red' }}>Please enter your information!</p> : null}
-        {applicationState.failedMotivation ? <p style={{ color: 'red' }}>Please enter your motivation!</p> : null}
-        <label htmlFor='motivation'>Motivation</label>
+        <h3 id='applicationTitle'>Application for {sessionStorage.getItem('title')}</h3>
+        {applicationState.failedBoth ? <p style={{ color: '#ef6461' }}>Please enter your information!</p> : null}
+        {applicationState.failedMotivation ? <p style={{ color: '#ef6461' }}>Please enter your motivation!</p> : null}
+        <label htmlFor='motivation' >Motivation</label>
         <br />
         <input type='text' name='motivation' id='motivation' ref={motivation} />
         <br />
-        {applicationState.failedCover ? <p style={{ color: 'red' }}>Please enter your cover letter!</p> : null}
+        {applicationState.failedCover ? <p style={{ color: '#ef6461' }}>Please enter your cover letter!</p> : null}
         <label htmlFor='coverLetter'>Cover letter</label>
         <br />
         <input type='text' name='coverLetter' id='coverLetter' ref={coverLetter} />

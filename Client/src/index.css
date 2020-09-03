@@ -111,6 +111,18 @@ button.location, button.type, button.skills, .filterBtn {
   display: inline
 }
 
+#applicationTitle {
+  text-align: center;
+  padding: 15px
+}
+
+input {
+  padding: 5px;
+  margin: 10px;
+  width: 25rem;
+  height: 5rem
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
