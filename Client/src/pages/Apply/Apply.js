@@ -60,11 +60,10 @@ const ApplyPage = _ => {
 
         axios(config)
           .then(({ data }) => {
-            console.log(data)
             setApplicationState({ ...applicationState, didApply: true })
           })
           .catch(e => console.log(e))
-          
+
         // axios.post(`/apply/${jobID}/${token}`, applicationString, headers)
         //   .then(_ => {
         //     setApplicationState({ ...applicationState, didApply: true })
@@ -93,16 +92,17 @@ const ApplyPage = _ => {
         <br />
         <textarea name='coverLetter' id='coverLetterInput' ref={coverLetter} />
         <br />
-        <button onClick={applicationState.handleApply} class='applicationBtn'>Apply!</button>
-      </div>
-      <div>
         {applicationState.didApply
           ? <div>
             <h6 id='appSuccess'>You have applied. Good luck!</h6>
             <Link to='/search'>
               <button class='applicationBtn'>Back to search</button>
             </Link>
+            <br />
           </div> : null}
+        {applicationState.didApply
+          ? null
+          : <button onClick={applicationState.handleApply} id='applicationApplyBtn' class='blockButton'>Apply!</button>}
       </div>
     </div>
   )

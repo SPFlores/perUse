@@ -134,6 +134,14 @@ button.location, button.type, button.skills, .filterBtn {
   display: inline
 }
 
+#applicationApplyBtn {
+  background-color: #7830bf;
+  color: white;
+  border: #7830bf;
+  margin: 10px 0px 0px 0px;
+  padding: 10px
+}
+
 .usernameEntry, .passwordEntry, #nameEntry {
   padding: 5px;
   margin: 5px;
