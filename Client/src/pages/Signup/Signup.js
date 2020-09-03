@@ -76,17 +76,30 @@ const SignupPage = _ => {
       })
       sessionStorage.setItem('isLoggedIn', false)
     } else {
-      console.log('axios post /register call')
-      axios.post('/register', {
+      const user = {
         username: username.current.value,
         password: password.current.value,
         name: name.current.value
-      })
-        .then(_ => {
-          axios.post('/login', {
+      }
+      const config = {
+        method: 'post',
+        url: 'https://divercity-test.herokuapp.com/register',
+        data: user
+      }
+
+      axios(config)
+        .then(({ data }) => {
+          const user = {
             username: username.current.value,
             password: password.current.value
-          })
+          }
+          const config = {
+            method: 'post',
+            url: 'https://divercity-test.herokuapp.com/login',
+            data: user
+          }
+
+          axios(config)
             .then(({ data }) => {
               sessionStorage.setItem('isLoggedIn', true)
               sessionStorage.setItem('token', data.token)
@@ -94,7 +107,32 @@ const SignupPage = _ => {
             })
             .catch(e => console.log(e))
         })
-        .catch(e => console.log(e))
+        .catch(e => {
+          alert('Unable to register!')
+          console.log(e)
+        })
+
+      // axios.post('/register', {
+      //   username: username.current.value,
+      //   password: password.current.value,
+      //   name: name.current.value
+      // })
+      //   .then(_ => {
+      //     axios.post('/login', {
+      //       username: username.current.value,
+      //       password: password.current.value
+      //     })
+      //       .then(({ data }) => {
+      //         sessionStorage.setItem('isLoggedIn', true)
+      //         sessionStorage.setItem('token', data.token)
+      //         setNewUserState({ ...newUserState, isLoggedIn: true })
+      //       })
+      //       .catch(e => console.log(e))
+      //   })
+      //   .catch(e => {
+      //     alert('Unable to register!')
+      //     console.log(e)
+      //   })
     }
   }
 
