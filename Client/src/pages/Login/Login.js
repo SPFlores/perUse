@@ -22,7 +22,6 @@ const LoginPage = _ => {
   userState.handleLogInUser = e => {
     e.preventDefault()
     if (username.current.value === '' && password.current.value === '') {
-      // console.log('major yar at your service captain sarcasm')
       setUserState({
         ...userState,
         failedLoginUsername: true,
@@ -30,7 +29,6 @@ const LoginPage = _ => {
       })
       sessionStorage.setItem('isLoggedIn', false)
     } else if (username.current.value === '') {
-      // console.log('big bad user yar')
       setUserState({
         ...userState,
         failedLoginUsername: true,
@@ -38,7 +36,6 @@ const LoginPage = _ => {
       })
       sessionStorage.setItem('isLoggedIn', false)
     } else if (password.current.value === '') {
-      // console.log('big bad password yar')
       setUserState({
         ...userState,
         failedLoginUsername: false,
@@ -87,11 +84,11 @@ const LoginPage = _ => {
   }
 
   return (
-    <div class='mainArea'>
+    <div className='mainArea'>
       {userState.isLoggedIn ? userState.renderRedirect() : null}
 
       <div>
-        <h4 class='userPlease'>Log in to get the most out of perUse!</h4>
+        <h4 className='userPlease'>Log in to get the most out of perUse!</h4>
       </div>
 
       <form>
@@ -99,26 +96,26 @@ const LoginPage = _ => {
         <div>
           {userState.failedLoginUsername ? <p style={{ color: '#ef6461' }}>Please enter your username!</p> : null}
           <label htmlFor='username'>Username: </label>
-          <input type='text' id='username' name='username' ref={username} class='usernameEntry' />
+          <input type='text' id='username' name='username' ref={username} className='usernameEntry' />
         </div>
         <div>
           {userState.failedLoginPassword ? <p style={{ color: '#ef6461' }}>Please enter your password!</p> : null}
           <label htmlFor='password'>Password: </label>
-          <input type='password' id='password' name='password' ref={password} class='passwordEntry' />
+          <input type='password' id='password' name='password' ref={password} className='passwordEntry' />
         </div>
         {/* checkbox for "remember me" that sets local storage */}
         {/* <div>
           <input type='checkbox' name='rememberMe' id='rememberMe' ref={rememberMe} />
           <label htmlFor='rememberMe'>Remember Me</label>
         </div> */}
-        <button onClick={userState.handleLogInUser} class='loginPgBtn'>Submit</button>
+        <button onClick={userState.handleLogInUser} className='loginPgBtn'>Submit</button>
       </form>
 
       <br />
 
       <h5>Don't have an account? No problem!</h5>
       <Link to='/signup'>
-        <button class='loginPgBtn'>Sign Up</button>
+        <button className='loginPgBtn'>Sign Up</button>
       </Link>
     </div>
   )

@@ -32,7 +32,6 @@ const SignupPage = _ => {
       })
       sessionStorage.setItem('isLoggedIn', false)
     } else if (name.current.value === '') {
-      console.log('big bad name yar')
       setNewUserState({
         ...newUserState,
         failedAll: false,
@@ -43,7 +42,6 @@ const SignupPage = _ => {
       })
       sessionStorage.setItem('isLoggedIn', false)
     } else if (username.current.value === '') {
-      console.log('big bad user yar')
       setNewUserState({
         ...newUserState,
         failedAll: false,
@@ -54,7 +52,6 @@ const SignupPage = _ => {
       })
       sessionStorage.setItem('isLoggedIn', false)
     } else if (password.current.value === '') {
-      console.log('big bad password yar')
       setNewUserState({
         ...newUserState,
         failedAll: false,
@@ -65,7 +62,6 @@ const SignupPage = _ => {
       })
       sessionStorage.setItem('isLoggedIn', false)
     } else if (password.current.value !== passwordConf.current.value) {
-      console.log('passwords dont match')
       setNewUserState({
         ...newUserState,
         failedAll: false,
@@ -137,11 +133,11 @@ const SignupPage = _ => {
   }
 
   return (
-    <div class='mainArea'>
+    <div className='mainArea'>
       {newUserState.isLoggedIn ? newUserState.renderRedirect() : null}
 
       <div>
-        <h4 class='userPlease'>Sign up to get the most out of perUse!</h4>
+        <h4 className='userPlease'>Sign up to get the most out of perUse!</h4>
       </div>
 
       <form>
@@ -155,26 +151,26 @@ const SignupPage = _ => {
         <div>
           {newUserState.failedSignupUsername ? <p style={{ color: '#ef6461' }}>Please enter your username!</p> : null}
           <label htmlFor='username'>Username: </label>
-          <input type='text' id='username' name='username' ref={username} class='usernameEntry' />
+          <input type='text' id='username' name='username' ref={username} className='usernameEntry' />
         </div>
         <div>
           {newUserState.failedSignupPassword ? <p style={{ color: '#ef6461' }}>Please enter a password!</p> : null}
           <label htmlFor='password'>Password: </label>
-          <input type='password' id='password' name='password' ref={password} class='passwordEntry' />
+          <input type='password' id='password' name='password' ref={password} className='passwordEntry' />
         </div>
         <div>
           {newUserState.failedConfirmPassword ? <p style={{ color: 'red' }}>Your passwords do not match!</p> : null}
           <label htmlFor='passwordConf'>Password: </label>
-          <input type='password' id='passwordConf' name='passwordConf' ref={passwordConf} class='passwordEntry' />
+          <input type='password' id='passwordConf' name='passwordConf' ref={passwordConf} className='passwordEntry' />
         </div>
-        <button onClick={newUserState.handleSignUpUser} class='signupBtn'>Submit</button>
+        <button onClick={newUserState.handleSignUpUser} className='signupBtn'>Submit</button>
       </form>
 
       <br />
 
       <h5>Already have an account? No problem!</h5>
       <Link to='/login'>
-        <button class='signupBtn'>Login</button>
+        <button className='signupBtn'>Login</button>
       </Link>
     </div>
   )

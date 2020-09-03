@@ -18,7 +18,6 @@ const ApplyPage = _ => {
   applicationState.handleApply = e => {
     e.preventDefault()
     if (sessionStorage.getItem('isLoggedIn') === 'true' && sessionStorage.getItem('token').length > 0) {
-      console.log('user is logged in')
       setApplicationState({ ...applicationState, isLoggedIn: true })
       if (motivation.current.value === '' && coverLetter.current.value === '') {
         setApplicationState({
@@ -78,7 +77,7 @@ const ApplyPage = _ => {
   }
 
   return (
-    <div class='mainArea'>
+    <div className='mainArea'>
       <div>
         <h3 id='applicationTitle'>Application for {sessionStorage.getItem('title')}</h3>
         {applicationState.failedBoth ? <p style={{ color: '#ef6461' }}>Please enter your information!</p> : null}
@@ -96,13 +95,13 @@ const ApplyPage = _ => {
           ? <div>
             <h6 id='appSuccess'>You have applied. Good luck!</h6>
             <Link to='/search'>
-              <button class='applicationBtn'>Back to search</button>
+              <button className='applicationBtn'>Back to search</button>
             </Link>
             <br />
           </div> : null}
         {applicationState.didApply
           ? null
-          : <button onClick={applicationState.handleApply} id='applicationApplyBtn' class='blockButton'>Apply!</button>}
+          : <button onClick={applicationState.handleApply} id='applicationApplyBtn' className='blockButton'>Apply!</button>}
       </div>
     </div>
   )
