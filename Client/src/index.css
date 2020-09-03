@@ -23,7 +23,7 @@ li a.navLink {
 }
 
 .navLILeft:hover {
-  background-color: #26bfb3;
+  background-color: #5628e2;
 }
 
 .navLIRight:hover {
@@ -39,12 +39,15 @@ li a.navLink {
   color: #262425;
 }
 
+.blockButton {
+  display: block;
+  margin: auto
+}
+
 #searchingButton {
   color: white;
   background: #5628e2;
   border: #5628e2;
-  display: block;
-  margin: auto;
   height: 40px;
   width: 15%;
   align-content: center;
@@ -56,11 +59,20 @@ li a.navLink {
   transition: all 0.5s;
 }
 
+button.location, button.type, button.skills {
+  background-color: #26bfb3;
+  border: #26bfb3;
+  color: #262425;
+  padding: 10px;
+  margin: 10px;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  color: #262425
 }
 
 code {

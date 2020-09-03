@@ -109,27 +109,21 @@ const SearchPage = _ => {
 
   searchState.getLocationOptions = _ => {
     const listItems = searchState.locations.map(location =>
-      <div key={searchState.locations.indexOf(location)}>
-        <button className='location' id={location} key={location} onClick={searchState.filterJobs}>{location}</button>
-      </div>
+      <button className='location' id={location} key={searchState.locations.indexOf(location)} onClick={searchState.filterJobs}>{location}</button>
     )
     return <ul>{listItems}</ul>
   }
 
   searchState.getTypeOptions = _ => {
     const listItems = searchState.types.map(type =>
-      <div key={searchState.types.indexOf(type)}>
-        <button className='type' id={type} key={type} onClick={searchState.filterJobs}>{type}</button>
-      </div>
+      <button className='type' id={type} onClick={searchState.filterJobs} key={searchState.types.indexOf(type)}>{type}</button>
     )
     return <ul>{listItems}</ul>
   }
 
   searchState.getSkillOptions = _ => {
     const listItems = searchState.skills_tags.map(skill =>
-      <div key={searchState.skills_tags.indexOf(skill)}>
-        <button className='skills' id={skill} key={skill} onClick={searchState.filterJobs}>{skill}</button>
-      </div>
+      <button className='skills' id={skill} onClick={searchState.filterJobs} key={searchState.skills_tags.indexOf(skill)}>{skill}</button>
     )
     return <ul>{listItems}</ul>
   }
