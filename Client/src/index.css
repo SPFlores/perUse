@@ -30,6 +30,12 @@ li a.navLink {
   background-color: #ef6461;
 }
 
+.mainArea {
+  display: block;
+  margin: auto;
+  padding: 20px;
+}
+
 #mainTitle {
   color: #5628e2;
   text-align: center;
@@ -53,18 +59,56 @@ li a.navLink {
   align-content: center;
 }
 
-#searchingButton:hover {
-  box-shadow: 0 5px #262425;
-  transform: translateY(4px);
-  transition: all 0.5s;
+button:hover {
+  box-shadow: 0 4px #262425;
+  transform: translateY(3px);
+  transition: 0.3s;
 }
 
-button.location, button.type, button.skills {
+button.location, button.type, button.skills, .filterBtn {
   background-color: #26bfb3;
   border: #26bfb3;
-  color: #262425;
+  color: white;
   padding: 10px;
   margin: 10px;
+  display: inline
+}
+
+.allJobs {
+  background-color: #26bfb3;
+  border: #26bfb3;
+  color: white;
+  padding: 15px;
+  margin: auto;
+  display: block
+}
+
+.jobCard {
+  border-style: solid;
+  border-color: #ef6461;
+  border-width: 5px;
+  padding: 5px 15px 15px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 90%
+}
+
+.jobCardTitle {
+  text-align: center;
+}
+
+.jobH {
+  display: inline;
+  margin: 10px
+}
+
+.notLoggedInBtn, .applyBtn {
+  background-color: #ef6461;
+  color: white;
+  border: #ef6461;
+  padding: 10px;
+  margin: 10px;
+  display: inline
 }
 
 body {

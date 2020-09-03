@@ -137,24 +137,24 @@ const SearchPage = _ => {
 
   searchState.renderCards = _ => {
     const jobCards = searchState.jobs.map(job =>
-      <div key={job.id}>
-        <h4>Title: {job.title}</h4>
-        <h5>Company: {job.company}</h5>
-        <h5>Type: {job.job_type}</h5>
-        <h5>Location: {job.location}</h5>
+      <div key={job.id} class='jobCard'>
+        <h3 class='jobCardTitle'>Title: {job.title}</h3>
+        <h5 class='jobH'>Company: {job.company}</h5>
+        <h5 class='jobH'>Type: {job.job_type}</h5>
+        <h5 class='jobH'>Location: {job.location}</h5>
         {/* It is acknowledged that the below is not best practice when importing data from outside APIs for consumption. However, it does allow for the most flexibility in terms of consuming this particular API and is limited in scope to this small project. An alternative would be to import the description and .replace() all tags with apces, however this does not allow for flexibility in formatting of description. */}
         <div dangerouslySetInnerHTML={{ __html: job.description }} />
-        <p>Skills: {job.skills_tag.join(', ')}</p>
-        <p>Applicant count: {job.applicant_count}</p>
+        <p><strong>Skills:</strong> {job.skills_tag.join(', ')}</p>
+        <p><strong>Applicant count:</strong> {job.applicant_count}</p>
         {searchState.ableToApply
-          ? <button id={job.id} data-title={job.title} onClick={searchState.handleApply}>Apply</button>
+          ? <button id={job.id} data-title={job.title} onClick={searchState.handleApply} class='applyBtn'>Apply</button>
           : <div>
-            <p style={{ color: 'red' }}>Please log in/sign up to apply!</p>
+            <p style={{ color: '#ef6461' }}>Please log in/sign up to apply!</p>
             <Link to='/login'>
-              <button>Login</button>
+              <button class='notLoggedInBtn'>Login</button>
             </Link>
             <Link to='/signup'>
-              <button>Sign Up</button>
+              <button class='notLoggedInBtn'>Sign Up</button>
             </Link>
           </div>
         }
@@ -163,16 +163,16 @@ const SearchPage = _ => {
   }
 
   return (
-    <div>
+    <div class='mainArea'>
       <h4>Welcome to our search page!</h4>
-      <p>Here you can view all jobs available or sort by location, type, of skills needed. We make it easy to filter for the job right for you--once chosen filter is selected, you will be presented with options for your search, no typing or guessing at keywords necessary. Feel free to browse, and don't forget to sign in if you want to apply!</p>
-      <button id='searchAll' onClick={searchState.handleSearchAll}>Display All Jobs</button>
+      <p>Here you can view all jobs available or sort by location, type, of skills needed. We make it easy to filter for the job right for you--once chosen filter is selected, you will be presented with options for your search, no typing or guessing at keywords necessary.</p>
       <br />
+      <button id='searchAll' onClick={searchState.handleSearchAll} class='allJobs blockButton'>Display All Jobs</button>
       <br />
       <h4>Filter jobs by:</h4>
-      <button id='locationButton' onClick={searchState.locationFilter}>Location</button>
-      <button id='typeButton' onClick={searchState.typeFilter}>Type of Job</button>
-      <button id='skillsButton' onClick={searchState.skillsFilter}>Skills</button>
+      <button id='locationButton' onClick={searchState.locationFilter} class='filterBtn'>Location</button>
+      <button id='typeButton' onClick={searchState.typeFilter} class='filterBtn'>Type of Job</button>
+      <button id='skillsButton' onClick={searchState.skillsFilter} class='filterBtn'>Skills</button>
 
       <br />
       <br />
